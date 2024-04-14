@@ -23,6 +23,19 @@ jobs:
         run: dotnet restore src/GitHub_Actions_Cert_Prep.sln
       - name: Build
         run: dotnet build src/GitHub_Actions_Cert_Prep.sln --no-restore
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - name: Restore dependencies
+        run: dotnet restore src/GitHub_Actions_Cert_Prep.sln
+      - name: Build
+        run: dotnet build src/GitHub_Actions_Cert_Prep.sln --no-restore
       - name: Test
         run: dotnet test tests/GitHub_Actions_Cert_Prep.Tests/GitHub_Actions_Cert_Prep.Tests.csproj --no-build --list-tests
      
