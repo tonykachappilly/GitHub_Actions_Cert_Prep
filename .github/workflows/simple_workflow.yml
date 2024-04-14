@@ -25,6 +25,7 @@ jobs:
         run: dotnet build src/GitHub_Actions_Cert_Prep.sln --no-restore
   test:
     runs-on: ubuntu-latest
+    needs: build
 
     steps:
       - uses: actions/checkout@v4
