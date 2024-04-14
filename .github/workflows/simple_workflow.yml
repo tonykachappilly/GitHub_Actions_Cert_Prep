@@ -20,9 +20,9 @@ jobs:
         with:
           dotnet-version: 8.0.x
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore src/GitHub_Actions_Cert_Prep.sln
       - name: Build
-        run: dotnet build src/GitHub_Actions_Cert_Prep.csproj --no-restore
+        run: dotnet build src/GitHub_Actions_Cert_Prep.sln --no-restore
 
   test:
     needs: build
