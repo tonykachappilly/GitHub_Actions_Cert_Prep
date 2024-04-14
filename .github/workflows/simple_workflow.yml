@@ -35,6 +35,6 @@ jobs:
         with:
           dotnet-version: 8.0.x
       - name: Restore dependencies
-        run: dotnet restore GitHub_Actions_Cert_Prep.Test/GitHub_Actions_Cert_Prep.Test.csproj
+        run: dotnet restore tests/GitHub_Actions_Cert_Prep.Tests/GitHub_Actions_Cert_Prep.Tests.csproj
       - name: Test
-        run: dotnet test GitHub_Actions_Cert_Prep.Test/GitHub_Actions_Cert_Prep.Test.csproj --no-build --verbosity normal --framework net8.0
+        run: dotnet test tests/GitHub_Actions_Cert_Prep.Tests/GitHub_Actions_Cert_Prep.Tests.csproj --no-build --verbosity normal --framework net8.0
