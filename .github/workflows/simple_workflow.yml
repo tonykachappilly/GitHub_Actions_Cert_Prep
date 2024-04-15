@@ -24,6 +24,8 @@ jobs:
         run: dotnet restore src/GitHub_Actions_Cert_Prep.sln
       - name: Build
         run: dotnet build src/GitHub_Actions_Cert_Prep.sln --no-restore
+      - name: Echo Secret
+        run: echo I'm trying to pull some secrets here ${{ secrets.MY_FIRST_SECRET }}
   test:
     runs-on: ubuntu-latest
     needs: build
