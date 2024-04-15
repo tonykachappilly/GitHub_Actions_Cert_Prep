@@ -84,7 +84,7 @@ jobs:
         uses: FreEZer00/teams-webhook-action@v1.4.1
         with:
         # url of the webhook to use
-          webhook_url: https://ustglobal.webhook.office.com/webhookb2/09cd7892-efe5-451d-87d4-133094ebc3ef@a4431f4b-c207-4733-9530-34c08a9b2b8d/IncomingWebhook/c80ac4bc17ee4d99aa4908c5c1e61d90/fbc6c0d9-b560-4937-bd04-12346d2646ae
+          webhook_url: ${{ secrets.TEAMS_WEBHOOK }}
         # Card title
           title: 'Workflow completed!'
         # JSON parsed job context
