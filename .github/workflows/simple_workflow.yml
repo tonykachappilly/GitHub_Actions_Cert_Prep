@@ -65,7 +65,7 @@ jobs:
             ${{ runner.os }}-nuget-
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: dotnet build src/GitHub_Actions_Cert_Prep.sln --configuration Release
 
       - name: dotnet publish
         run: dotnet publish src/GitHub_Actions_Cert_Prep.sln -c Release -o ${{env.DOTNET_ROOT}}/myapp
