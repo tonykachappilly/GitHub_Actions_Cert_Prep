@@ -25,7 +25,8 @@ jobs:
       - name: Build
         run: dotnet build src/GitHub_Actions_Cert_Prep.sln --no-restore
       - name: Echo Secret
-        run: echo I'm trying to pull some secrets here ${{ secrets.MY_FIRST_SECRET }}
+        run: |
+            echo  "I'm trying to pull some secrets here ${{ secrets.MY_FIRST_SECRET }}"
   test:
     runs-on: ubuntu-latest
     needs: build
