@@ -26,7 +26,7 @@ jobs:
         run: dotnet build src/GitHub_Actions_Cert_Prep.sln --no-restore
       - name: Echo Secret
         env:
-          MY_FIRST_SECRET: ${{ secrets.MY_FIRST_SECRET }}
+          MY_FIRST_SECRET: ${{ vars.MY_FIRST_VARIABLE }}
         run: |
             echo  "I'm trying to pull and show some secrets here $MY_FIRST_SECRET"
   test:
