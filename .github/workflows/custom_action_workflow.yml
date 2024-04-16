@@ -10,7 +10,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Change directory
-        run:  cd /custom_actions_js        
+        run:  cd custom_actions_js        
       - name: Build
         run: |
           npm install
