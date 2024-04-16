@@ -6,6 +6,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run Custom Action
-        uses: ./  # Uses the local action repository
+        uses: tonykachappilly/GitHub_Actions_Cert_Prep/custom_actions_js@main
         with:
-          input_parameter: 'test_input'
+          input_parameter: 'My World'
