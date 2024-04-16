@@ -8,11 +8,10 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: Change directory
-        run:  cd custom_actions_js        
+          node-version: ${{ matrix.node-version }}    
       - name: Build
         run: |
+          cd custom_actions_js
           npm install
           npx webpack
           npm run build
