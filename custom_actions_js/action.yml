@@ -1,0 +1,13 @@
+name: 'Hello World'
+description: 'My first custom action using javascript'
+inputs:
+   who-to-greet:
+     desription: 'who to greet'
+     required: true
+     default: 'Welcome'
+outputs:
+   time:
+    description: 'The time we greeted you'
+runs:
+  using: 'node12'
+  main: 'src/main.js'
