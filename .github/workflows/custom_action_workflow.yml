@@ -12,6 +12,8 @@ jobs:
       - name: Build
         run: |
           cd custom_actions_js
+          npm install @actions/core
+          npm install @actions/github
           npm install
           npx webpack
           npm run build
