@@ -8,6 +8,7 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -23,6 +24,11 @@ jobs:
         run: dotnet restore src/GitHub_Actions_Cert_Prep.sln
       - name: Build
         run: dotnet build src/GitHub_Actions_Cert_Prep.sln --no-restore
+      - name: Echo Secret
+        env:
+          MY_FIRST_SECRET: ${{ secrets.MY_FIRST_SECRET }}
+        run: |
+            echo  "I'm trying to pull and show some secrets here $MY_FIRST_SECRET"
   test:
     runs-on: ubuntu-latest
     needs: build
@@ -39,4 +45,48 @@ jobs:
         run: dotnet build src/GitHub_Actions_Cert_Prep.sln --no-restore
       - name: Test
         run: dotnet test tests/GitHub_Actions_Cert_Prep.Tests/GitHub_Actions_Cert_Prep.Tests.csproj --no-build --list-tests
-     
+  publish:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Set up dependency caching for faster builds
+        uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Build with dotnet
+        run: dotnet build src/GitHub_Actions_Cert_Prep.sln --configuration Release
+
+      - name: dotnet publish
+        run: dotnet publish src/GitHub_Actions_Cert_Prep.sln -c Release -o ${{ github.workspace }}/myapp
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v3
+        with:
+          name: .net-app
+          path: ${{ github.workspace }}/myapp
+  notify:
+    runs-on: ubuntu-latest
+    needs: [build, test, publish]
+    if: always()
+    steps:
+      - name: Notify Teams
+        uses: FreEZer00/teams-webhook-action@v1.4.1
+        with:
+        # url of the webhook to use
+          webhook_url: ${{ secrets.TEAMS_WEBHOOK }}
+        # Card title
+          title: 'Workflow completed!'
+        # JSON parsed job context
+          job: ${{ toJson(needs) }}       
+  
