@@ -4,19 +4,7 @@ jobs:
   greet:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}    
-      - name: Build
-        run: |
-          cd custom_actions_js
-          npm install @actions/core
-          npm install @actions/github
-          npm install
-          npx webpack
-          npm run build
+      - uses: actions/checkout@v4      
       - name: Run Custom Action
         uses: tonykachappilly/GitHub_Actions_Cert_Prep/custom_actions_js@main
         with:
