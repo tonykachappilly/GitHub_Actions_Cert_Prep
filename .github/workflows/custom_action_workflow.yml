@@ -1,11 +1,11 @@
 name: Custom Action Workflow
 on: [push]
 jobs:
-  test-action:
+  greet:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Run Custom Action
         uses: tonykachappilly/GitHub_Actions_Cert_Prep/custom_actions_js@main
         with:
-          input_parameter: 'My World'
+          who-to-greet: 'My World'
