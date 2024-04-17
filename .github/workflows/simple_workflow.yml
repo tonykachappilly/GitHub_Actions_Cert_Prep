@@ -46,8 +46,7 @@ jobs:
       - name: Build
         run: dotnet build src/GitHub_Actions_Cert_Prep.sln --no-restore
       - name: Test
-        run: dotnet test tests/GitHub_Actions_Cert_Prep.Tests/GitHub_Actions_Cert_Prep.Tests.csproj --no-build --list-tests
-      - id: get_messages
+        run: dotnet test tests/GitHub_Actions_Cert_Prep.Tests/GitHub_Actions_Cert_Prep.Tests.csproj --no-build --list-tests      
       - name: Set Output      
         run: echo "my_variable='Tony, This is my output variable'" >> "$GITHUB_OUTPUT"
         
