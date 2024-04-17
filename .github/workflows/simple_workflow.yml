@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     outputs: 
-      my_build_output_var : ${{ steps.get_messages.my_variable }} 
+      my_build_output_var: ${{ steps.get_messages.my_variable }} 
 
     steps:
       - uses: actions/checkout@v4
