@@ -13,6 +13,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs: 
+      my_build_output_var : ${{ steps.set_output.my_variable }} 
 
     steps:
       - uses: actions/checkout@v4
@@ -45,6 +47,9 @@ jobs:
         run: dotnet build src/GitHub_Actions_Cert_Prep.sln --no-restore
       - name: Test
         run: dotnet test tests/GitHub_Actions_Cert_Prep.Tests/GitHub_Actions_Cert_Prep.Tests.csproj --no-build --list-tests
+      - name: Set Output
+        id: set_output
+        run: echo "my_variable='Tony, This is my output variable'" >> $GITHUB_OUTPUT
   publish:
     runs-on: ubuntu-latest
     needs: test
