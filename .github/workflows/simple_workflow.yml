@@ -95,5 +95,5 @@ jobs:
         # JSON parsed job context
           job: ${{ toJson(needs) }}      
       - name: Use output variable
-        run: echo "Hey, my output variable says ${{ needs.test.outputs.my_build_output_var }}
+        run: echo "Hey, my output variable says ${{ needs.test.outputs.my_build_output_var }}"
   
