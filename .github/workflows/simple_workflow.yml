@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     outputs: 
-      my_build_output_var : ${{ steps.set_output.my_variable }} 
+      my_build_output_var : ${{ steps.get_messages.my_variable }} 
 
     steps:
       - uses: actions/checkout@v4
@@ -48,7 +48,7 @@ jobs:
       - name: Test
         run: dotnet test tests/GitHub_Actions_Cert_Prep.Tests/GitHub_Actions_Cert_Prep.Tests.csproj --no-build --list-tests
       - name: Set Output
-        id: set_output
+        id: get_messages
         run: echo "my_variable='Tony, This is my output variable'" >> $GITHUB_OUTPUT
   publish:
     runs-on: ubuntu-latest
