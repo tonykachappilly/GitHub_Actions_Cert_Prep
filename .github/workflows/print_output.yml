@@ -16,6 +16,13 @@ jobs:
     - name: print variable step
       run: |
         echo "This is my variable:$custom_myVariable"
+    - name: set output using default out variable
+      id: step1_junk_output
+      run: |
+       echo "junk_output_var=junk output value" >> "$GITHUB_OUTPUT"
+    - name: print output variable within step 1
+      run: |
+        echo "This is my output variable:{{steps.step1_junk_output.outputs.junk_output_var}}"
 
   job2:
     runs-on: ubuntu-latest    
@@ -34,6 +41,6 @@ jobs:
       run: |
         echo "The value of output1 is: ${{ needs.job1.outputs.output1 }}"
         echo "The value of output2 is: ${{ needs.job2.outputs.output2 }}"
-    - name: print variable in job 3
+    - name: print output variable from step 1
       run: |
-        echo "This is my variable:$custom_myVariable"
+        echo "This is my output variable from step 1:{{needs.job1.outputs.junk_output_var}}"
