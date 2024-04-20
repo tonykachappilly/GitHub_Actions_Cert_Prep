@@ -22,7 +22,7 @@ jobs:
        echo "junk_output_var=junk output value" >> "$GITHUB_OUTPUT"
     - name: print output variable within step 1
       run: |
-        echo "This is my output variable:{{steps.step1_junk_output.outputs.junk_output_var}}"
+        echo "This is my output variable:${{steps.step1_junk_output.outputs.junk_output_var}}"
 
   job2:
     runs-on: ubuntu-latest    
@@ -43,4 +43,4 @@ jobs:
         echo "The value of output2 is: ${{ needs.job2.outputs.output2 }}"
     - name: print output variable from step 1
       run: |
-        echo "This is my output variable from step 1:{{needs.job1.outputs.junk_output_var}}"
+        echo "This is my output variable from step 1:${{needs.job1.outputs.junk_output_var}}"
