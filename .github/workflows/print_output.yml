@@ -13,6 +13,12 @@ jobs:
     steps:
     - id: step1
       run: echo "::set-output name=output1::value1"
+    - name: set variable step
+      run: |
+        echo "custom_myVariable=junk value" >> "$GITHUB_ENV"
+    - name: print variable step
+      run: |
+        echo "This is my variable:$custom_myVariable"
 
   job2:
     runs-on: ubuntu-latest
