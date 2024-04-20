@@ -3,15 +3,10 @@ name: Print Output
 on: [push]
 
 jobs:
-env:
- custom_myVariable:
-
   job1:
-    runs-on: ubuntu-latest
-    
+    runs-on: ubuntu-latest    
     outputs:
-      output1: ${{ steps.step1.outputs.output1 }}
-    
+      output1: ${{ steps.step1.outputs.output1 }}    
     steps:
     - id: step1
       run: echo "::set-output name=output1::value1"
@@ -23,22 +18,18 @@ env:
         echo "This is my variable:$custom_myVariable"
 
   job2:
-    runs-on: ubuntu-latest
-    
+    runs-on: ubuntu-latest    
     outputs:
-      output2: ${{ steps.step2.outputs.output2 }}
-    
+      output2: ${{ steps.step2.outputs.output2 }}    
     steps:
     - id: step2
       run: echo "::set-output name=output2::value2"
 
   job3:
     needs: [job1, job2]
-    runs-on: ubuntu-latest
-    
+    runs-on: ubuntu-latest    
     steps:
-    - uses: actions/checkout@v2
-    
+    - uses: actions/checkout@v2    
     - name: Use outputs from job1 and job2
       run: |
         echo "The value of output1 is: ${{ needs.job1.outputs.output1 }}"
