@@ -3,6 +3,8 @@ name: Print Output
 on: [push]
 
 jobs:
+env:
+ custom_myVariable:
 
   job1:
     runs-on: ubuntu-latest
