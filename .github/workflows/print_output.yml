@@ -6,7 +6,8 @@ jobs:
   job1:
     runs-on: ubuntu-latest    
     outputs:
-      output1: ${{ steps.step1.outputs.output1 }}    
+      output1: ${{ steps.step1.outputs.output1 }}
+      output_custom: ${{ steps.step1_output_custom.outputs.output_custom }}
     steps:
     - id: step1
       run: echo "::set-output name=output1::value1"
@@ -20,6 +21,10 @@ jobs:
       id: step1_junk_output
       run: |
        echo "junk_output_var=junk output value" >> "$GITHUB_OUTPUT"
+    - name: set custom output using default out variable
+      id: step1_output_custom
+      run: |
+       echo "output_custom=junk custom output value" >> "$GITHUB_OUTPUT"
     - name: print output variable within step 1
       run: |
         echo "This is my output variable:${{steps.step1_junk_output.outputs.junk_output_var}}"
@@ -44,3 +49,6 @@ jobs:
     - name: print output variable from step 1
       run: |
         echo "This is my output variable from step 1:${{needs.job1.outputs.junk_output_var}}"
+    - name: print custom output variable from step 1
+      run: |
+        echo "This is my output variable from step 1:${{needs.job1.outputs.output_custom}}"
